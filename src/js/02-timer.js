@@ -3,8 +3,14 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 let intervalId = null;
+
 const dateTimePicker = document.querySelector('#datetime-picker');
 const buttonDataStart = document.querySelector('[data-start]');
+
+const daysElement = document.querySelector('[data-days]');
+const hoursElement = document.querySelector('[data-hours]');
+const minutesElement = document.querySelector('[data-minutes]');
+const secondsElement = document.querySelector('[data-seconds]');
 
 buttonDataStart.disabled = true;
 
@@ -29,14 +35,6 @@ buttonDataStart.addEventListener('click', onDataStartButtonClick);
 
 function onDataStartButtonClick() {
   intervalId = setInterval(showTime, 1000);
-
-  //setInterval();
-  //  const TimePicker = new Date(dateTimePicker.value);
-  //  const currentDate = new Date(Date.now());
-  //  const dateDifference = TimePicker - currentDate;
-  //  console.log(dateDifference);
-  //  console.log(typeof dateDifference);
-  //alert('123');
 }
 
 function addLeadingZero(value) {
@@ -73,6 +71,12 @@ function getDateDifference() {
 function showTime() {
   const dateDifference = getDateDifference();
   const objectTime = convertMs(dateDifference);
+
+  setDays(objectTime.days);
+  setHours(objectTime.hours);
+  setMinutes(objectTime.minutes);
+  setSeconds(objectTime.seconds);
+
   if (
     objectTime.days === 0 &&
     objectTime.hours === 0 &&
@@ -82,4 +86,20 @@ function showTime() {
     clearInterval(intervalId);
     return;
   }
+}
+
+function setDays(value) {
+  daysElement.textContent = String(value);
+}
+
+function setHours(value) {
+  hoursElement.textContent = addLeadingZero(value);
+}
+
+function setMinutes(value) {
+  minutesElement.textContent = addLeadingZero(value);
+}
+
+function setSeconds(value) {
+  secondsElement.textContent = addLeadingZero(value);
 }
