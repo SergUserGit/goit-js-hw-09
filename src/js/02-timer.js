@@ -22,6 +22,13 @@ const secondsElement = document.querySelector('[data-seconds]');
 
 buttonDataStart.disabled = true;
 
+Notiflix.Notify.init({
+  width: '280px',
+  position: 'left-top',
+  distance: '200px',
+  opacity: 1,
+});
+
 const options = {
   enableTime: true,
   time_24hr: true,
