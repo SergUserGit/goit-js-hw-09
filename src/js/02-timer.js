@@ -2,6 +2,7 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 
+const dateTimePicker = document.querySelector('#datetime-picker');
 const buttonDataStart = document.querySelector('[data-start]');
 
 buttonDataStart.disabled = true;
@@ -22,3 +23,14 @@ const options = {
 };
 
 flatpickr('#datetime-picker', options);
+
+buttonDataStart.addEventListener('click', onDataStartButtonClick);
+
+function onDataStartButtonClick() {
+  const TimePicker = new Date(dateTimePicker.value);
+  const currentDate = new Date(Date.now());
+
+  const dateDifference = TimePicker - currentDate;
+  console.log(dateDifference);
+  console.log(typeof dateDifference);
+}
