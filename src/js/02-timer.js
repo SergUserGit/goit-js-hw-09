@@ -34,6 +34,7 @@ flatpickr('#datetime-picker', options);
 buttonDataStart.addEventListener('click', onDataStartButtonClick);
 
 function onDataStartButtonClick() {
+  buttonDataStart.disabled = true;
   intervalId = setInterval(showTime, 1000);
 }
 
