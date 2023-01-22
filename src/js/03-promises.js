@@ -33,26 +33,9 @@ function onFormSubmit(event) {
     createPromise(i, delaySum)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
-        //   Notiflix.Notify.Confirm('Так');
-        //    Notiflix.Notify.Confirm(
-        //      'Fulfilled promise ' +
-        //         String(position) +
-        //         ' in ' +
-        //         String(delay) +
-        //         ' ms'
-        //     );
-        //   console.log(position, delay);
-        // console.log('Так');
       })
       .catch(({ position, delay }) => {
         Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`);
-        //  Notiflix.Notify.failure(
-        //     'Rejected promise ' + String(position) + ' in ' + String(delay) + 'ms'
-        //   );
-        //   Notiflix.Notify.failure('Ні');
-        //  console.log(position, delay);
-        //  console.log('Ні');
-        //  console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       });
   }
 }
