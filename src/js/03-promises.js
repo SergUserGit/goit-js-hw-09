@@ -1,3 +1,18 @@
+import Notiflix from 'notiflix';
+
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Block } from 'notiflix/build/notiflix-block-aio';
+
+Notiflix.Notify.init({
+  width: '280px',
+  position: 'right-top',
+  distance: '10px',
+  opacity: 1,
+});
+
 const formElement = document.querySelector('.form');
 formElement.addEventListener('submit', onFormSubmit);
 
@@ -17,10 +32,27 @@ function onFormSubmit(event) {
     delaySum = firstStepElementValue + delayStepElementValue * (i - 1);
     createPromise(i, delaySum)
       .then(({ position, delay }) => {
-        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        Notiflix.Notify.success(`Fulfilled promise ${position} in ${delay}ms`);
+        //   Notiflix.Notify.Confirm('Так');
+        //    Notiflix.Notify.Confirm(
+        //      'Fulfilled promise ' +
+        //         String(position) +
+        //         ' in ' +
+        //         String(delay) +
+        //         ' ms'
+        //     );
+        //   console.log(position, delay);
+        // console.log('Так');
       })
       .catch(({ position, delay }) => {
-        console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+        Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`);
+        //  Notiflix.Notify.failure(
+        //     'Rejected promise ' + String(position) + ' in ' + String(delay) + 'ms'
+        //   );
+        //   Notiflix.Notify.failure('Ні');
+        //  console.log(position, delay);
+        //  console.log('Ні');
+        //  console.log(`❌ Rejected promise ${position} in ${delay}ms`);
       });
   }
 }
@@ -38,20 +70,3 @@ function createPromise(position, delay) {
     }, delay);
   });
 }
-
-//const fetchUserFromServer = username => {
-//  return new Promise((resolve, reject) => {
-//    console.log(`Fetching data for ${username}`);
-
-//   setTimeout(() => {
-// Change value of isSuccess variable to simulate request status
-//   const isSuccess = true;
-
-//    if (isSuccess) {
-//      resolve("success value");
-//     } else {
-//       reject("error");
-//     }
-//    }, 2000);
-//  });
-//};
