@@ -18,13 +18,13 @@ formElement.addEventListener('submit', onFormSubmit);
 
 const amountElement = document.querySelector('input[name="amount"]');
 const firstDelayElement = document.querySelector('input[name="delay"]');
-const DelayStepElement = document.querySelector('input[name="step"]');
+const delayStepElement = document.querySelector('input[name="step"]');
 
 function onFormSubmit(event) {
   event.preventDefault();
 
   const amountElementValue = Number(amountElement.value);
-  const delayStepElementValue = Number(DelayStepElement.value);
+  const delayStepElementValue = Number(delayStepElement.value);
   const firstStepElementValue = Number(firstDelayElement.value);
 
   let delaySum = 0;

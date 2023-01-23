@@ -37,6 +37,8 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] <= Date.now()) {
       buttonDataStart.disabled = true;
+      clearInterval(intervalId);
+      setTime(0, 0, 0, 0);
       Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       buttonDataStart.disabled = false;
@@ -49,6 +51,8 @@ flatpickr('#datetime-picker', options);
 buttonDataStart.addEventListener('click', onDataStartButtonClick);
 
 function onDataStartButtonClick() {
+  clearInterval(intervalId);
+
   buttonDataStart.disabled = true;
   intervalId = setInterval(showTime, 1000);
 }
@@ -78,9 +82,9 @@ function convertMs(ms) {
 }
 
 function getDateDifference() {
-  const TimePicker = new Date(dateTimePicker.value);
+  const timePicker = new Date(dateTimePicker.value);
   const currentDate = new Date(Date.now());
-  const dateDifference = TimePicker - currentDate;
+  const dateDifference = timePicker - currentDate;
   return dateDifference;
 }
 
@@ -88,10 +92,12 @@ function showTime() {
   const dateDifference = getDateDifference();
   const objectTime = convertMs(dateDifference);
 
-  setDays(objectTime.days);
-  setHours(objectTime.hours);
-  setMinutes(objectTime.minutes);
-  setSeconds(objectTime.seconds);
+  setTime(
+    objectTime.days,
+    objectTime.hours,
+    objectTime.minutes,
+    objectTime.seconds
+  );
 
   if (
     objectTime.days === 0 &&
@@ -105,7 +111,7 @@ function showTime() {
 }
 
 function setDays(value) {
-  daysElement.textContent = String(value);
+  daysElement.textContent = addLeadingZero(value);
 }
 
 function setHours(value) {
@@ -118,4 +124,11 @@ function setMinutes(value) {
 
 function setSeconds(value) {
   secondsElement.textContent = addLeadingZero(value);
+}
+
+function setTime(days, hours, minutes, seconds) {
+  setDays(days);
+  setHours(hours);
+  setMinutes(minutes);
+  setSeconds(seconds);
 }

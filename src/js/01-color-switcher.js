@@ -5,23 +5,23 @@ function getRandomHexColor() {
 let intervalId = null;
 const bodyDocument = document.querySelector('body');
 
-const StartButton = document.querySelector('[data-start]');
-StartButton.addEventListener('click', onStartButtonClick);
+const startButton = document.querySelector('[data-start]');
+startButton.addEventListener('click', onStartButtonClick);
 
-const StopButton = document.querySelector('[data-stop]');
-StopButton.addEventListener('click', onStopButtonClick);
+const stopButton = document.querySelector('[data-stop]');
+stopButton.addEventListener('click', onStopButtonClick);
 
-StopButton.disabled = true;
+stopButton.disabled = true;
 
 function onStartButtonClick() {
-  StartButton.disabled = true;
-  StopButton.disabled = false;
+  startButton.disabled = true;
+  stopButton.disabled = false;
   intervalId = setInterval(changesColors, 1000);
 }
 
 function onStopButtonClick() {
-  StartButton.disabled = false;
-  StopButton.disabled = true;
+  startButton.disabled = false;
+  stopButton.disabled = true;
   clearInterval(intervalId);
 }
 
